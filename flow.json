@@ -1,0 +1,32 @@
+{
+  "emulators": {
+    "default": {
+      "port": 3569,
+      "serviceAccount": "emulator-account"
+    }
+  },
+  "contracts": {
+    "MessiNFT2": "./contracts/MessiNFT2.cdc"
+  },
+  "networks": {
+    "emulator": "127.0.0.1:3569",
+    "mainnet": "access.mainnet.nodes.onflow.org:9000",
+    "testnet": "access.devnet.nodes.onflow.org:9000"
+  },
+
+  "accounts": {
+    "emulator-account": {
+      "address": "f8d6e0586b0a20c7",
+      "key": "a8b9c4063d877b3fe90cf80ffa07e41a0d8f315ebe484b90de5f446dd8a669b1"
+    },
+    "testnet-account": {
+      "address": "0x70f20757a526c9de",
+      "key": "38c73a77b88e2fc24ce8189b3f8f2141ab95f6c7e9c3ec141a7eb163d324de17"
+    }
+  },
+  "deployments": {
+    "testnet": {
+      "testnet-account": ["MessiNFT2"]
+    }
+  }
+}

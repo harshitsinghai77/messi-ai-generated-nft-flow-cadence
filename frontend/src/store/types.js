@@ -1,0 +1,1 @@
+export const SET_MINTED_IMAGES = "SET_MINTED_IMAGES";

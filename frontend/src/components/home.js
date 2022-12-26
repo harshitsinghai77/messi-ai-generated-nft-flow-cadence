@@ -13,6 +13,7 @@ import {
   getIDs,
 } from "../cadence/scripts/get_script";
 import messiVideo from "../video/messi.mp4";
+import Wallpaper from "../video/wallpaper.webp";
 
 fcl.config({
   "flow.network": "testnet",
@@ -339,6 +340,8 @@ const Home = () => {
   const globalState = useContext(store);
   const { mintedImages } = globalState.state;
 
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+
   const toggleVideoMute = () => {
     if (videoRef.current.muted) {
       videoRef.current.muted = false;
@@ -346,6 +349,12 @@ const Home = () => {
       videoRef.current.muted = true;
     }
   };
+
+  useEffect(() => {
+    const videoElement = new Audio();
+    videoElement.src = messiVideo;
+    videoElement.oncanplay = () => setIsVideoLoaded(true);
+  }, []);
 
   const RenderMintedImages = () => {
     return (
@@ -369,14 +378,22 @@ const Home = () => {
         <div className="relative z-30 p-5 text-white  bg-opacity-50 rounded-xl">
           <HomeComponents handleClick={toggleVideoMute} />
         </div>
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          className="absolute z-10 w-auto min-w-full min-h-full max-w-none"
-          src={messiVideo}
-        />
+        {isVideoLoaded ? (
+          <video
+            ref={videoRef}
+            autoPlay
+            loop
+            muted
+            className="absolute z-10 w-auto min-w-full min-h-full max-w-none"
+            src={messiVideo}
+          />
+        ) : (
+          <img
+            src={Wallpaper}
+            alt="NFT  Wallpaper"
+            className="absolute z-10 w-auto min-w-full min-h-full max-w-none"
+          />
+        )}
       </header>
 
       {mintedImages.length > 0 && <RenderMintedImages />}
